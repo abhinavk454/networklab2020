@@ -26,7 +26,7 @@ def tcpserver(host=socket.gethostname(), port=9002):
 if __name__ == "__main__":
     # if i want to start server on certain address and port
     # then i have to pass address and port as argument by default it's set to loopback addr
-    tcpserver()
+    tcpserver(host='127.0.0.1')
 
 # i have used fstring in this assignment if during execution of this code error happens
 # then python3 on your system needs upgrade means it's below 3.6
