@@ -5,6 +5,7 @@
 # Assignment : 02(Q.01)  #
 ##########################
 
+
 import socket
 
 
@@ -24,7 +25,7 @@ def web_server(host=socket.gethostname(), port=9002):
             data = "HTTP/1.1 200 OK\r\n"
             data += "Content-Type: text/html; charset=utf-8\r\n"
             data += "\r\n"
-            f = open('test.html')
+            f = open('test.html')#host this file on server
             m = f.read()
             data += m
             clientsocket.sendall(data.encode())

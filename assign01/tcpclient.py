@@ -19,4 +19,4 @@ def tcpclient(host=socket.gethostname(), port=9002):
 if __name__ == "__main__":
     # if i want to connect to remote tcp server then i have to
     # pass its ip and port as argument of function below by default it will connect to 127.0.0.1
-    tcpclient()
+    tcpclient(host='127.0.0.1')
