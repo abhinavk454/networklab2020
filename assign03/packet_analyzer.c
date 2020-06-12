@@ -1,3 +1,10 @@
+/********************
+Lab : Network Lab
+Name : Abhinav Kumar
+Enroll no.: 510817075
+Assignment : 03(Q.01)
+*********************/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -7,27 +14,6 @@
 #include <netinet/in.h>
 #include <netinet/if_ether.h>
 #include <asm/byteorder.h>
-struct iphdr
-{
-#if defined(__LITTLE_ENDIAN_BITFIELD)
-    __u8 ihl : 4,
-        version : 4;
-#elif defined(__LITTLE_ENDIAN_BITFIELD)
-    __u8 version : 4,
-        ihl : 4;
-#else
-#error "Error"
-#endif
-    __u8 tos;
-    __be16 tot_len;
-    __be16 id;
-    __be16 frag_off;
-    __u8 ttl;
-    __u8 protocol;
-    __sum16 check;
-    __be32 saddr;
-    __be32 daddr;
-};
 int main()
 {
     struct ethhdr
@@ -63,31 +49,4 @@ int main()
     printf("\t | -Source Address: % .2X - % .2X - % .2X - % .2X - % .2X - % .2X\n", eth->h_source[0], eth->h_source[1], eth->h_source[2], eth->h_source[3], eth->h_source[4], eth->h_source[5]);
     printf("\t | -Destination Address: % .2X - % .2X - % .2X - % .2X - % .2X - % .2X\n", eth->h_dest[0], eth->h_dest[1], eth->h_dest[2], eth->h_dest[3], eth->h_dest[4], eth->h_dest[5]);
     printf("\t | -Protocol: % d\n", eth->h_proto);
-    unsigned short iphdrlen;
-    struct iphdr *ip = (struct iphdr *)(buffer + sizeof(struct ethhdr));
-    memset(&source, 0, sizeof(source));
-    source.sin_addr.s_addr = ip->saddr;
-    memset(&dest, 0, sizeof(dest));
-    dest.sin_addr.s_addr = ip->daddr;
-    FILE *log_txt;
-    log_txt = fopen("data.txt", "w+");
-    fprintf(log_txt, "\t | -Version: % d\n", (unsigned int)ip->version);
-
-    fprintf(log_txt, "\t | -Internet Header Length: % d DWORDS or % d Bytes\n", (unsigned int)ip->ihl, ((unsigned int)(ip->ihl)) * 4);
-
-    fprintf(log_txt, "\t | -Type Of Service: % d\n", (unsigned int)ip->tos);
-
-    fprintf(log_txt, "\t | -Total Length: % d Bytes\n", ntohs(ip->tot_len));
-
-    fprintf(log_txt, "\t | -Identification: % d\n", ntohs(ip->id));
-
-    fprintf(log_txt, "\t | -Time To Live: % d\n", (unsigned int)ip->ttl);
-
-    fprintf(log_txt, "\t | -Protocol: % d\n", (unsigned int)ip->protocol);
-
-    fprintf(log_txt, "\t | -Header Checksum: % d\n", ntohs(ip->check));
-
-    fprintf(log_txt, "\t | -Source IP: % s\n", inet_ntoa(source.sin_addr));
-
-    fprintf(log_txt, "\t | -Destination IP: % s\n", inet_ntoa(dest.sin_addr));
 }
